@@ -1,0 +1,33 @@
+# ----------------------------------------------------------------------------------------------------
+# Reference:
+# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ----------------------------------------------------------------------------------------------------
+
+bibliotheca:
+
+  domain:
+
+  port:
+
+debug: true
+trace: false
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure: info
+
+# Embedded Tomcat
+server:
+
+  port: 8797
+
+spring:
+
+  banner:
+    location: classpath:banner-dev.txt
+
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/"
+    username: 
+    password: 
+
