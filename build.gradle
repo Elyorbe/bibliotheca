@@ -20,6 +20,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	
+	implementation 'com.google.guava:guava:29.0-jre'
+	
 	runtimeOnly 'org.postgresql:postgresql'
 	
 	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
