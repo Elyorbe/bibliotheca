@@ -1,0 +1,13 @@
+# ----------------------------------------------------------------------------------------------------
+# Reference:
+#	https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ----------------------------------------------------------------------------------------------------
+
+applicaton:
+
+spring:
+  
+  mustache:
+    enabled: true 
+    pefix: classpath:/templates/
+    suffix: .html
