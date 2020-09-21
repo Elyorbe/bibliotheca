@@ -32,7 +32,7 @@ public class Role {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
+	@Column(name = "role_id", updatable = false, unique = true, nullable = false)
 	private Long id;
 	
 	@ManyToMany(mappedBy = "roles")
@@ -45,14 +45,14 @@ public class Role {
 	private Boolean activeStatus = true;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "creator", referencedColumnName = "id", updatable = false, nullable = false)
+	@JoinColumn(name = "creator", referencedColumnName = "account_id", updatable = false, nullable = false)
 	private User creator;
 	
 	@Column(name = "creation_date")
 	private OffsetDateTime creationDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "updater", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "updater", referencedColumnName = "account_id", nullable = false)
 	private User updater;
 	
 	@Column(name = "update_date", nullable = false)

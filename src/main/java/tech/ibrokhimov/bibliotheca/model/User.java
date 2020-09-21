@@ -33,7 +33,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
+	@Column(name = "account_id", updatable = false, unique = true, nullable = false)
 	private Long id;
 	
 	@Column(name = "username", updatable = false, unique = true, nullable = false)
@@ -51,6 +51,9 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 	
+	@Column(name = "books_checked_out")
+	private Integer totalBooksCheckedOut;
+	
 	@Column(name = "active_status", nullable = false)
 	private Boolean activeStatus = true;
 	
@@ -61,22 +64,22 @@ public class User {
 	private Boolean immutableStatus = true;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "creator", referencedColumnName = "id", updatable = false, nullable = false)
+	@JoinColumn(name = "creator", referencedColumnName = "account_id", updatable = false, nullable = false)
 	private User creator;
 	
 	@Column(name = "creation_date")
 	private OffsetDateTime creationDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "updater", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "updater", referencedColumnName = "account_id", nullable = false)
 	private User updater;
 	
 	@Column(name = "update_date", nullable = false)
 	private OffsetDateTime updateDate;
 	
 	@ManyToMany
-	@JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "account_id"),
+	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
 	private Set<Role> roles;
 
 	public User() {
@@ -120,6 +123,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public Integer getTotalBooksCheckedOut() {
+		return totalBooksCheckedOut;
+	}
+	
+	public void setTotalBooksCheckedOut(Integer totalBooksCheckedOut) {
+		this.totalBooksCheckedOut = totalBooksCheckedOut;
 	}
 
 	public Boolean isActive() {
