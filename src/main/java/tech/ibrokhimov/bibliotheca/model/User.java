@@ -39,7 +39,7 @@ public class User {
 	@Column(name = "username", updatable = false, unique = true, nullable = false)
 	private String username;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 	
 	@Column(name = "email", unique = true, nullable = false)
@@ -91,6 +91,13 @@ public class User {
 		this.id = id;
 	}
 	
+	public User(String username, String email, String firstName, String lastName) {
+		this.username = username;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -126,7 +133,7 @@ public class User {
 	}
 	
 	public Integer getTotalBooksCheckedOut() {
-		return totalBooksCheckedOut;
+		return totalBooksCheckedOut = 0;
 	}
 	
 	public void setTotalBooksCheckedOut(Integer totalBooksCheckedOut) {
@@ -199,6 +206,7 @@ public class User {
 	
 	@PrePersist
 	public void prePersist() {
+		this.totalBooksCheckedOut = 0;
 		this.creationDate = OffsetDateTime.now();
 		this.updateDate = this.creationDate;
 	}
