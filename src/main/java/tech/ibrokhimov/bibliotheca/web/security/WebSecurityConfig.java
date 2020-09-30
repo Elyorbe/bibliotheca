@@ -14,9 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import tech.ibrokhimov.bibliotheca.BibliothecaServer;
 import tech.ibrokhimov.bibliotheca.controller.Mappings;
 
 @Configuration
@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(getEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(BibliothecaServer.getEncoder());
 	}
 
 	@Override
@@ -69,10 +69,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			
 		};
 	}
-	
-	@Bean
-	public BCryptPasswordEncoder getEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
 }
