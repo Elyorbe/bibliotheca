@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>User Registration</title>
+		<style>
+			.create-user {
+				margin: 16px;
+				margin: auto;
+				width: 50%;
+			}
+			input[type=text], input[type=password] {
+			  width: 100%;
+			  padding: 15px;
+			  margin: 5px 0 22px 0;
+			  display: inline-block;
+			  border: none;
+			  background: #f1f1f1;
+			}
+			input[type=text]:focus, input[type=password]:focus {
+ 			 background-color: #ddd;
+ 			 outline: none;
+			}
+			.registerbtn {
+			  background-color: #4CAF50;
+			  color: white;
+			  padding: 16px 20px;
+			  margin: 8px 0;
+			  border: none;
+			  cursor: pointer;
+			  width: 100%;
+			  opacity: 0.9;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="create-user">
+			<h1>Register a member</h1>
+			<form action="/u/create" method="POST">
+				<div>
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" required>
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="text" id="email" name="email" required>
+				</div>
+				<div>
+					<label for="firstName">First name</label>
+					<input type="text" id="firstName" name="firstName" required>
+				</div>
+				<div>
+					<label for="lastName">Last name</label>
+					<input type="text" id="lastName" name="lastName" required>
+				</div>
+				<div>
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" required>
+				</div>
+				<div>
+					<label for="repassword">Repeat Password</label>
+					<input type="password" id="repassword" required>
+				</div>
+				<button type="submit" class="registerbtn"> Create</button>
+			</form>
+		</div>
+	</body>
+</html>
