@@ -90,7 +90,7 @@ CREATE TABLE book_item
 	-- Description of physical location of the book
 	location_identifier text NOT NULL,
 	purchase_date timestamp with time zone,
-	price decimal,
+	price text,
 	creator bigint NOT NULL,
 	creation_date timestamp with time zone NOT NULL,
 	updater bigint NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE role
 /* Create Foreign Keys */
 
 ALTER TABLE account
-	ADD FOREIGN KEY (creator)
+	ADD FOREIGN KEY (updater)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -158,7 +158,7 @@ ALTER TABLE account
 
 
 ALTER TABLE account
-	ADD FOREIGN KEY (updater)
+	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -174,7 +174,7 @@ ALTER TABLE account_role
 
 
 ALTER TABLE author
-	ADD FOREIGN KEY (creator)
+	ADD FOREIGN KEY (updater)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -182,14 +182,6 @@ ALTER TABLE author
 
 
 ALTER TABLE author
-	ADD FOREIGN KEY (updater)
-	REFERENCES account (account_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE book
 	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
@@ -199,6 +191,14 @@ ALTER TABLE book
 
 ALTER TABLE book
 	ADD FOREIGN KEY (updater)
+	REFERENCES account (account_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE book
+	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -238,7 +238,7 @@ ALTER TABLE reservation
 
 
 ALTER TABLE role
-	ADD FOREIGN KEY (creator)
+	ADD FOREIGN KEY (updater)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -246,7 +246,7 @@ ALTER TABLE role
 
 
 ALTER TABLE role
-	ADD FOREIGN KEY (updater)
+	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT

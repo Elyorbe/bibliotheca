@@ -1,6 +1,5 @@
 package tech.ibrokhimov.bibliotheca.model;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
@@ -51,7 +50,7 @@ public class BookItem {
 	private OffsetDateTime purchaseDate;	
 	
 	@Column(name = "price")
-	private BigDecimal price;
+	private String price;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "creator", referencedColumnName = "account_id", updatable = false, nullable = false)
@@ -139,11 +138,11 @@ public class BookItem {
 		this.purchaseDate = purchaseDate;
 	}
 
-	public BigDecimal getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
