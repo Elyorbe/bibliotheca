@@ -41,6 +41,9 @@ public class Book {
 	@Column(name = "lang")
 	private String language;
 	
+	@Column(name = "pages")
+	private Integer pages;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "creator", referencedColumnName = "account_id", updatable = false, nullable = false)
 	private User creator;
@@ -61,22 +64,40 @@ public class Book {
 	
 	@OneToMany(mappedBy = "book")
 	private List<BookItem> bookItems;
-	
-	public Book() {
-		super();
-	}
 
-	public Book(Long id) {
-		super();
-		this.id = id;
+	public static class Builder {
+		private Author author;
+		private String title;
+		private String subject;
+		private String publisher;
+		private String language;
+		private Integer pages;
+		
+		public Builder(Author author, String title) {
+			this.author = author;
+			this.title = title;
+		}	
+		
+		public Builder subject(String val)
+			{ subject = val; 	return this; }
+		public Builder publisher(String val)
+			{ publisher = val; 	return this; }
+		public Builder language(String val)
+			{ language = val; 	return this; }
+		public Builder pages(Integer val)
+			{ pages = val; 		return this; }
+		
+		public Book build() {
+			return new Book(this);
+		}
 	}
-
-	public Book(String title, String subject, String publisher, String language) {
-		super();
-		this.title = title;
-		this.subject = subject;
-		this.publisher = publisher;
-		this.language = language;
+	private Book(Builder builder) {
+		author = builder.author;
+		title = builder.title;
+		subject = builder.subject;
+		publisher = builder.publisher;
+		language = builder.language;
+		pages = builder.pages;
 	}
 	
 	public Long getId() {

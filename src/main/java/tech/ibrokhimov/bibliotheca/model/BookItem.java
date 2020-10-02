@@ -1,5 +1,6 @@
 package tech.ibrokhimov.bibliotheca.model;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
@@ -29,6 +30,12 @@ public class BookItem {
 	@Column(name = "book_item_id", updatable = false, unique = true, nullable = false)
 	private Long id;
 	
+	@Column(name = "edition")
+	private String editon;
+	
+	@Column(name = "pub_date")
+	private LocalDate publicationDate;
+	
 	@Column(name = "isbn")
 	private String iSBN;
 	
@@ -47,7 +54,7 @@ public class BookItem {
 	private String locationIdentifier;
 	
 	@Column(name = "purchase_date")
-	private OffsetDateTime purchaseDate;	
+	private LocalDate purchaseDate;	
 	
 	@Column(name = "price")
 	private String price;
@@ -70,24 +77,80 @@ public class BookItem {
 	@JoinColumn(name = "book_item_book_id")
 	private Book book;
 	
-	public BookItem() {
-		super();
+	public static class Builder {
+		private String editon;
+		private LocalDate publicationDate;
+		private String iSBN;
+		private BookFormat format;
+		private BookStatus status;
+		private Integer rackNumber;
+		private String locationIdentifier;
+		private LocalDate purchaseDate;
+		private String price;
+		private Book book;
+		
+		public Builder(String edition, String iSBN) {
+			this.editon = edition;
+			this.iSBN = iSBN;
+		}
+		
+		public Builder publicationDate(LocalDate val)
+			{ publicationDate = val;	return this; }
+		public Builder format(BookFormat val)
+			{ format = val;				return this; }
+		public Builder status(BookStatus val)
+			{ status = val;				return this; }
+		public Builder rackNumber(Integer val)
+			{ rackNumber = val;			return this; }
+		public Builder locationIdentifier(String val)
+			{ locationIdentifier = val;	return this; }
+		public Builder purchaseDate(LocalDate val) 
+			{ purchaseDate = val; 		return this; }
+		public Builder price(String val)
+			{ price = val;				return this; }
+		public Builder book(Book val)
+			{ book = val;				return this; }
+		
+		public BookItem build() {
+			return new BookItem(this);
+		}
 	}
 	
-	public BookItem(String iSBN, BookFormat format, Integer rackNumber, Book book) {
-		super();
-		this.iSBN = iSBN;
-		this.format = format;
-		this.rackNumber = rackNumber;
-		this.book = book;
+	private BookItem(Builder builder) {
+		editon = builder.editon;
+		publicationDate = builder.publicationDate;
+		iSBN = builder.iSBN;
+		format = builder.format;
+		status = builder.status;
+		rackNumber = builder.rackNumber;
+		locationIdentifier = builder.locationIdentifier;
+		purchaseDate = builder.purchaseDate;
+		price = builder.price;
+		book = builder.book;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getEditon() {
+		return editon;
+	}
+
+	public void setEditon(String editon) {
+		this.editon = editon;
+	}
+	
+	public LocalDate getPublicationDate() {
+		return publicationDate;
+	}
+
+	public void setPublicationDate(LocalDate publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 
 	public String getiSBN() {
@@ -130,11 +193,11 @@ public class BookItem {
 		this.locationIdentifier = locationIdentifier;
 	}
 
-	public OffsetDateTime getPurchaseDate() {
+	public LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
 
-	public void setPurchaseDate(OffsetDateTime purchaseDate) {
+	public void setPurchaseDate(LocalDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
