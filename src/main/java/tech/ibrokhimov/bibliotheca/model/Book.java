@@ -100,6 +100,9 @@ public class Book {
 		pages = builder.pages;
 	}
 	
+	public Book() {
+		
+	}
 	public Long getId() {
 		return id;
 	}

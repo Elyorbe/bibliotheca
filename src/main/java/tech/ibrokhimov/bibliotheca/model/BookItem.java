@@ -39,6 +39,9 @@ public class BookItem {
 	@Column(name = "isbn")
 	private String iSBN;
 	
+	@Column(name = "call_number", unique = true, nullable = false)
+	private String callNumber;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name ="format")
 	private BookFormat format;
@@ -128,6 +131,10 @@ public class BookItem {
 		price = builder.price;
 		book = builder.book;
 	}
+	
+	public BookItem() {
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -159,6 +166,14 @@ public class BookItem {
 
 	public void setiSBN(String iSBN) {
 		this.iSBN = iSBN;
+	}
+	
+	public String getCallNumber() {
+		return callNumber;
+	}
+
+	public void setCallNumber(String callNumber) {
+		this.callNumber = callNumber;
 	}
 
 	public BookFormat getFormat() {
