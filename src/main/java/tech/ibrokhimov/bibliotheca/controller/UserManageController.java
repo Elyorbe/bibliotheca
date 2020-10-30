@@ -19,7 +19,7 @@ import tech.ibrokhimov.bibliotheca.model.User;
 import tech.ibrokhimov.bibliotheca.service.UserService;
 
 @Controller
-@RequestMapping(Mappings.USER)
+@RequestMapping(Mappings.ADMIN + Mappings.USER)
 public class UserManageController {
 	
 	private UserService userService;
@@ -39,12 +39,14 @@ public class UserManageController {
 	}
 	
 	@PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, Object>> create(
+	public ModelAndView create(
 			@RequestParam(value = "username") final String _username,
 			@RequestParam(value = "email") final String _email,
 			@RequestParam(value = "firstName") final String _firstName,
 			@RequestParam(value = "lastName") final String _lastName,
-			@RequestParam final String password){
+			@RequestParam(value = "password") final String password){
+		
+		final ModelAndView mav = new ModelAndView();
 		
 		String username = _username.trim();
 		String email = _email.trim();
@@ -52,13 +54,17 @@ public class UserManageController {
 		String lastName = _lastName.trim();
 		
 		Optional<User> optUser = userService.findByUsername(username);
-		if(optUser.isPresent())
-			return ResponseEntity.ok(RestResponse.result(400, "User already exists"));
-		
+		if(optUser.isPresent()) {
+			mav.addObject("userCreateMessage", "Following username already exists: ");
+			mav.addObject("username", username);
+			mav.setViewName("book/response");
+			return mav;
+		}
 		User user = new User(username, email, firstName, lastName);
 		user.setActive(true);
 		user.setDeleted(false);
 		user.setImmutable(false);
+		user.setPassword("");
 		Set<Role> roleSet = new HashSet<>();
 		roleSet.add(Role.getUserRole());
 		user.setRoles(roleSet);
@@ -66,7 +72,10 @@ public class UserManageController {
 		userService.save(user, User.getAdminUser());
 		userService.updatePassword(user, password, User.getAdminUser());
 		
-		return ResponseEntity.ok(RestResponse.ok());
+		mav.addObject("userCreateMessage", "User with following username successfully created: ");
+		mav.addObject("username", username);
+		mav.setViewName("book/response");
+		return mav;
 	}
 	
 }
