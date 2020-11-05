@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	Optional<User> findByUsername(String username);
+	Optional<User> findByUsernameAndFirstName(String username, String firstName);
 	
 	@Modifying(clearAutomatically = true)
 	@Query("UPDATE User SET password = :password, updater = :updater, updateDate = :updateDate WHERE id = :id")
