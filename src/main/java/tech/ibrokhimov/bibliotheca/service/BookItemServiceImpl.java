@@ -1,13 +1,17 @@
 package tech.ibrokhimov.bibliotheca.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import tech.ibrokhimov.bibliotheca.model.Book;
 import tech.ibrokhimov.bibliotheca.model.BookItem;
 import tech.ibrokhimov.bibliotheca.model.BookItemRepository;
+import tech.ibrokhimov.bibliotheca.model.BookStatus;
 import tech.ibrokhimov.bibliotheca.model.User;
 
 @Service
@@ -35,12 +39,40 @@ public class BookItemServiceImpl implements BookItemService{
 		
 		String callNumber = generateCallNumber(bookItem, classNumber);
 		bookItem.setCallNumber(callNumber);
+		bookItem.setStatus(BookStatus.AVAILABLE);
 		bookItem.setCreator(actioner);
 		bookItem.setUpdater(actioner);
 		
 		return bookItemRepository.save(bookItem);
 	}
 	
+	
+	
+	@Override
+	public Long count() {
+		return bookItemRepository.count();
+	}
+	
+	@Override
+	public Long countByStatus(BookStatus status) {
+		return bookItemRepository.countByStatus(status);
+	}
+	
+	@Override
+	public BookItem findByCallNumber(String callNumber) {
+		return bookItemRepository.findByCallNumber(callNumber);
+	}
+
+	@Override
+	public List<BookItem> findAll() {
+		return bookItemRepository.findAll();
+	}
+	
+	@Override
+	public Page<BookItem> findAll(Pageable pageable) {
+		return bookItemRepository.findAll(pageable);
+	}
+
 	/**
 	 * Returns call number for the {@code bookItem}.<br>
 	 * Uses {@code classNumber} as a prefix. After that
