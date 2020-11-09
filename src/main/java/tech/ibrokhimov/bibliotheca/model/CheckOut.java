@@ -1,6 +1,7 @@
 package tech.ibrokhimov.bibliotheca.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
@@ -26,13 +27,13 @@ public class CheckOut {
 	private Long id;
 	
 	@Column(name = "check_out_date")
-	private OffsetDateTime checkOutDate;
+	private LocalDate checkOutDate;
 	
 	@Column(name = "due_date")
-	private OffsetDateTime dueDate;
+	private LocalDate dueDate;
 	
 	@Column(name = "return_date")
-	private OffsetDateTime returnDate;
+	private LocalDate returnDate;
 	
 	@Column(name = "fine")
 	private BigDecimal fine;
@@ -54,7 +55,7 @@ public class CheckOut {
 		this.id = id;
 	}
 
-	public CheckOut(OffsetDateTime dueDate, BookItem bookItem, User borrower) {
+	public CheckOut(LocalDate dueDate, BookItem bookItem, User borrower) {
 		super();
 		this.dueDate = dueDate;
 		this.bookItem = bookItem;
@@ -69,27 +70,27 @@ public class CheckOut {
 		this.id = id;
 	}
 
-	public OffsetDateTime getCheckOutDate() {
+	public LocalDate getCheckOutDate() {
 		return checkOutDate;
 	}
 
-	public void setCheckOutDate(OffsetDateTime checkOutDate) {
+	public void setCheckOutDate(LocalDate checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public OffsetDateTime getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(OffsetDateTime dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 
-	public OffsetDateTime getReturnDate() {
+	public LocalDate getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(OffsetDateTime returnDate) {
+	public void setReturnDate(LocalDate returnDate) {
 		this.returnDate = returnDate;
 	}
 
@@ -119,7 +120,7 @@ public class CheckOut {
 
 	@PrePersist
 	public void prePersist() {
-		checkOutDate = OffsetDateTime.now();
+		checkOutDate = LocalDate.now();
 	}
 	
 	@Override
