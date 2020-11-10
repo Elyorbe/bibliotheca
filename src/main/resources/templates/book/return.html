@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Book / Return</title>
+    
+    <!-- Bootstrap core CSS -->
+	<link type="text/css" href="/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .c-btn {
+			background-color: #1da6f6;
+			color: #ffff;
+	  }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+  {*>header*}
+
+<div class="container-fluid">
+  <div class="row">
+  {*>sidebar*}
+    
+    <div class="dashboard-title" style="margin-left: 270px; margin-top: 15px;">
+      <h3> Welcome To Admin Panel</h3>
+      <p style="color: #999">Admin / Return Books</p>
+    </div>
+   
+    <main role="main" id="app" class="col-md-9 ml-sm-auto col-lg-10 px-md-5">
+     	<h2 style="color: #1da6f6;">Return Books</h2>
+     	<hr>
+     	<form action="/a/book/return" method="POST">
+     		<div class="form-row">
+    			<!-- <div class="form-group col-md-6">
+      				<label for="username">Username</label>
+      				<input type="text" class="form-control" id="username" name="username" placeholder="Enter registered username">
+    			</div> -->
+   			 <div class="form-group col-md-12">
+     				 <label for="callNumber">Call Number</label>
+      				 <input type="text" class="form-control" id="callNumber" name="callNumber" placeholder="Enter call number printed on the book">
+    		</div>
+  			</div>
+  			<button type="submit" class="btn btn-md btn-block c-btn my-3">Return</button>
+     	</form>
+    </main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/resources/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+      <script src="/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+    <script>
+        /* globals Chart:false, feather:false */
+
+        (function () {
+            'use strict'
+
+            feather.replace()
+
+        })()
+
+    </script>
+  </body>
+</html>

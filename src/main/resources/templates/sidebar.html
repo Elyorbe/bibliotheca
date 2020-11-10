@@ -1,0 +1,47 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse shadow">
+    <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link {* activeDash *}" href="{*requestContext.request.contextPath*}/a/dashboard">
+                    <span data-feather="home"></span>
+                    Dashboard
+                    <hr>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {* activeTotal *}" href="{*requestContext.request.contextPath*}/a/book/list-all">
+                    <span data-feather="book"></span>
+                    Total Books
+                    <hr>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {* activeAdd *}" href="{*requestContext.request.contextPath*}/a/book/create">
+                    <span data-feather="plus-circle"></span>
+                    Add Books
+                    <hr>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {* activeIssue *}" href="{*requestContext.request.contextPath*}/a/book/issue">
+                    <span data-feather="arrow-right-circle"></span>
+                    Issue Books
+                    <hr>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {* activeReturn *}" href="{*requestContext.request.contextPath*}/a/book/return">
+                    <span data-feather="arrow-left-circle"></span>
+                    Return Books
+                    <hr>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {* activeUser *}" href="{*requestContext.request.contextPath*}/a/u/create">
+                    <span data-feather="users"></span>
+                    User Management
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

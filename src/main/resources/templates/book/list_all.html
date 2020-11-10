@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Book / Total</title>
+
+    <!-- Bootstrap core CSS -->
+	<link type="text/css" href="/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- BootstrapVue -->
+	<link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .c-btn {
+		background-color: #1da6f6;
+		color: #ffff;
+	}
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+  {*>header*}
+
+<div class="container-fluid">
+  <div class="row">
+  {*>sidebar*}
+
+    <div class="dashboard-title" style="margin-left: 270px; margin-top: 15px;">
+      <h3 > Welcome To Admin Panel</h3>
+      <p style="color: #999">Admin / Total Books</p>
+    </div>
+
+
+     <main role="main" id="app" class="col-md-9 ml-sm-auto col-lg-10 px-md-5">
+      <h2 style="color: #1da6f6;">Total Books
+      	<span style="float:right">
+      		<button type="button" class="btn btn-sm c-btn">Prev</button>
+      		<button type="button" class="btn btn-sm c-btn">Next</button>
+      	</span>
+      </h2>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm" cellspacing="0" role="grid">
+          <thead style="background-color: #abe0ff;">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN</th>
+              <th>Edition</th>
+              <th>Format</th>
+              <th>Status</th>
+              <th>Call Number</th>
+            </tr>
+          </thead>
+          <tbody v-for="(item, index) in list">
+            <tr>
+              <td>{{index + 1}}</td>
+              <td>{{item.title}}</td>
+              <td>{{item.author}}</td>
+              <td>{{item.isbn}}</td>
+              <td>{{item.edition}}</td>
+              <td>{{item.format}}</td>
+              <td>{{item.status}}</td>
+              <td>{{item.callNumber}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/resources/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+      <script src="/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <!-- Load polyfills to support older browsers -->
+<script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+<!-- Load Vue followed by BootstrapVue -->
+<script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+<!-- Load the following for BootstrapVueIcons support -->
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        /* globals Chart:false, feather:false */
+
+        (function () {
+            'use strict'
+
+            feather.replace()
+
+        })()
+
+      var app = new Vue({
+          el: "#app",
+          data: {
+              pageNo: {*pageNo*},
+              totalPages: {*totalPages*},
+              hasNextPages: {*hasNextPages*},
+              hasPreviousPages: {*hasPreviousPages*},
+        	  list: [{*#list*}{
+        		  title: "{*title*}",
+        		  author: "{*author*}",
+        		  isbn: "{*isbn*}",
+        		  edition: "{*edition*}",
+        		  format: "{*format*}",
+        		  status: "{*status*}",
+        		  callNumber: "{*callNumber*}"
+        	  },{*/list*}]
+          },
+          methods: {
+              next: function() {
+                if(!this.hasNextPages) return;
+                this.getBookList(this.pageNo + 1);
+              },
+              prev: function() {
+                  if(!this.hasPreviousPages) return;
+                  this.getBookList(this.pageNo - 1);
+              },
+              getBookList: function(pageNo) {
+                  axios.get("./list/page?pageNum=" + pageNo )
+                      .then(function(response) {
+                      var responseData = response.data;
+                      app.pageNo = responseData.pageNo;
+                      app.totalPages = responseData.totalPages;
+                      app.hasNextPages = responseData.hasNextPages;
+                      app.hasPreviousPages = responseData.hasPreviousPages;
+                      app.list = responseData.list;
+                  })
+              },
+        	  test: function(){
+
+        	 axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then(response => (this.info = response))
+        	  }
+          }
+      });
+    </script>
+  </body>
+</html>

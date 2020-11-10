@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Book / Create</title>
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="/resources/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        
+        .c-btn {
+			background-color: #1da6f6;
+			color: #ffff;
+	}
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+{*>header*}
+
+<div class="container-fluid">
+    <div class="row">
+        {*>sidebar*}
+
+        <div class="dashboard-title" style="margin-left: 270px; margin-top: 15px;">
+            <h3> Welcome To Admin Panel</h3>
+            <p style="color: #999">Admin / Add Books</p>
+        </div>
+        <main role="main" id="app" class="col-md-9 ml-sm-auto col-lg-10 px-md-5">
+            <h2 style="color: #1da6f6;">Add Books</h2>
+            <hr>
+            <form action="/a/book/create" method="POST">
+                <h3>Author Details</h3>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="authFirstName">First name</label>
+                        <input type="text" class="form-control" id="authFirstName" name="authFirstName" placeholder="First name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="authLastName">Last name</label>
+                        <input type="text" class="form-control" id="authLastName" name="authLastName" placeholder="Last name">
+                    </div>
+                </div>
+                
+                <h3>Book Details</h3>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="edition">Edition</label>
+                        <input type="text" class="form-control" name="edition" id="edition" placeholder="Edition">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="language">Language</label>
+                        <input type="text" class="form-control" id="language" name="language" placeholder="Language">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="publisher">Publisher</label>
+                        <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Publisher">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="pubDate">Publish Date</label>
+                        <input type="date" class="form-control" name="pubDate" id="pubDate" placeholder="Publish Date">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="format">Format</label>
+                        <select id="format" name="format" class="form-control">
+                            <option selected value="HARDCOVER">Hardcover</option>
+                            <option value="PAPERBACK">Paperback</option>
+                            <option value="AUDIOBOOK">Audio Book</option>
+                            <option value="EBOOK">eBook</option>
+                            <option value="NEWSPAPER">Newspaper</option>
+                            <option value="MAGAZINE">Magazine</option>
+                            <option value="JOURNAL">Journal</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="purchaseDate">Purchase date</label>
+                        <input type="date" class="form-control" id="purchaseDate" name="purchaseDate">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" id="price" name="price" placeholder="Price">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="pages">Pages</label>
+                        <input type="text" class="form-control" id="pages" name="pages" placeholder="Pages" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="rackNumber">Rack number</label>
+                        <input type="text" class="form-control" id="rackNumber" name="rackNumber" placeholder="Rack Number" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="classNumber">Call Number</label>
+                        <input type="text" class="form-control" id="classNumber" name="classNumber" placeholder="Call Number" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="locationIdentifier">Location identifier</label>
+                        <input type="text" class="form-control" id="locationIdentifier" name="locationIdentifier" placeholder="Location dentifier">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-md btn-block c-btn my-3">Add</button>
+            </form>
+        </main>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/resources/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="/resources/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+<script>
+    /* globals Chart:false, feather:false */
+
+    (function () {
+        'use strict'
+
+        feather.replace()
+
+    })()
+
+</script>
+</body>
+</html>
