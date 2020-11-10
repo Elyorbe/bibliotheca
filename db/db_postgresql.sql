@@ -54,7 +54,8 @@ CREATE TABLE author
 	creation_date timestamp with time zone NOT NULL,
 	updater bigint NOT NULL,
 	update_date timestamp with time zone NOT NULL,
-	PRIMARY KEY (author_id)
+	PRIMARY KEY (author_id),
+	UNIQUE (first_name, last_name)
 ) WITHOUT OIDS;
 
 
@@ -67,6 +68,7 @@ CREATE TABLE book
 	publisher text,
 	-- Language of the book
 	lang text,
+	pages int,
 	creator bigint NOT NULL,
 	creation_date timestamp with time zone NOT NULL,
 	updater bigint NOT NULL,
@@ -80,16 +82,22 @@ CREATE TABLE book
 CREATE TABLE book_item
 (
 	book_item_id bigserial NOT NULL UNIQUE,
+	edition text,
+	-- Publication date
+	-- 
+	pub_date date,
 	-- ISBN - ebook, paperback, hardcover edition of the same book will have differen ISBN
 	isbn text NOT NULL,
+	-- Call number based on Dewey Decimal classification system
+	call_number text NOT NULL UNIQUE,
 	-- Paperback, hardcover and etc.
 	format text NOT NULL,
 	-- Whether available, reservee, loaned or lost
 	status text NOT NULL,
-	rack_number int,
+	rack_number text,
 	-- Description of physical location of the book
-	location_identifier text NOT NULL,
-	purchase_date timestamp with time zone,
+	location_identifier text,
+	purchase_date date,
 	price text,
 	creator bigint NOT NULL,
 	creation_date timestamp with time zone NOT NULL,
@@ -107,11 +115,11 @@ CREATE TABLE check_out
 	check_out_id bigserial NOT NULL UNIQUE,
 	-- Date when the book is borrowed
 	-- 
-	check_out_date timestamp with time zone NOT NULL,
+	check_out_date date NOT NULL,
 	-- Date for the book to be returned
-	due_date timestamp with time zone NOT NULL,
+	due_date date NOT NULL,
 	-- Actual return date of the book
-	return_date timestamp with time zone,
+	return_date date,
 	-- Amount to be paid if a book return date is overdue
 	fine numeric DEFAULT 0.00,
 	book_item_id bigint NOT NULL,
@@ -150,7 +158,7 @@ CREATE TABLE role
 /* Create Foreign Keys */
 
 ALTER TABLE account
-	ADD FOREIGN KEY (updater)
+	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -158,7 +166,7 @@ ALTER TABLE account
 
 
 ALTER TABLE account
-	ADD FOREIGN KEY (creator)
+	ADD FOREIGN KEY (updater)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -206,7 +214,7 @@ ALTER TABLE book
 
 
 ALTER TABLE book_item
-	ADD FOREIGN KEY (updater)
+	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -214,7 +222,7 @@ ALTER TABLE book_item
 
 
 ALTER TABLE book_item
-	ADD FOREIGN KEY (creator)
+	ADD FOREIGN KEY (updater)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -238,7 +246,7 @@ ALTER TABLE reservation
 
 
 ALTER TABLE role
-	ADD FOREIGN KEY (updater)
+	ADD FOREIGN KEY (creator)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -246,7 +254,7 @@ ALTER TABLE role
 
 
 ALTER TABLE role
-	ADD FOREIGN KEY (creator)
+	ADD FOREIGN KEY (updater)
 	REFERENCES account (account_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -302,7 +310,10 @@ COMMENT ON COLUMN author.author_id IS 'Author ID';
 COMMENT ON COLUMN book.book_id IS 'Author ID';
 COMMENT ON COLUMN book.lang IS 'Language of the book';
 COMMENT ON COLUMN book.book_author_id IS 'Author ID';
+COMMENT ON COLUMN book_item.pub_date IS 'Publication date
+';
 COMMENT ON COLUMN book_item.isbn IS 'ISBN - ebook, paperback, hardcover edition of the same book will have differen ISBN';
+COMMENT ON COLUMN book_item.call_number IS 'Call number based on Dewey Decimal classification system';
 COMMENT ON COLUMN book_item.format IS 'Paperback, hardcover and etc.';
 COMMENT ON COLUMN book_item.status IS 'Whether available, reservee, loaned or lost';
 COMMENT ON COLUMN book_item.location_identifier IS 'Description of physical location of the book';
