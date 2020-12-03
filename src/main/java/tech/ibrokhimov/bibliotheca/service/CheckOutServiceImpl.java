@@ -2,10 +2,13 @@ package tech.ibrokhimov.bibliotheca.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import tech.ibrokhimov.bibliotheca.model.BookItem;
@@ -68,5 +71,21 @@ public class CheckOutServiceImpl implements CheckOutService{
 		return checkOutRepository.save(checkOut);
 	}
 	
+	
+	@Override
+	public List<CheckOut> findByDueDate(LocalDate dueDate) {
+		return checkOutRepository.findByDueDate(dueDate);
+	}
+
+//	@Scheduled(fixedRate = 5000)
+//	protected void test() {
+//		System.out.println("\n\n*********************************");
+//		LocalDate today = LocalDate.now();
+//		LocalDate tomorrow = today.plusDays(1);
+//		List<CheckOut> dueBooks = checkOutRepository.findByDueDate(tomorrow);
+//		for(CheckOut ch : dueBooks) {
+//			System.out.println(ch.getBorrower().getUsername());
+//		}
+//	}
 	
 }
