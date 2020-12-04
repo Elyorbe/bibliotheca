@@ -69,8 +69,9 @@ Then go to ``bibliotheca\conf\`` file and choose your preferred environment file
 
 ### Running the application
 
-Execute following command to run the application in the development environment
+Execute the following command to run the application in the development environment.
       
-      cd bibliotheca
-      gradlew bootRun --args="--spring.profiles.active=dev --spring.config.additional-location=conf\\"
+    cd bibliotheca
+    gradlew bootRun --args="--spring.profiles.active=dev --spring.config.additional-location=conf\\"
+    
  
