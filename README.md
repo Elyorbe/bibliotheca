@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-**Bibliotheca** is an **Integrated Libray Management System** for a library to track and manage items owned, orders made, bills paid, and patrons who have borrowed.
+**Bibliotheca** is an **Integrated Library Management System** for a library to track and manage items owned, orders made, bills paid, and patrons who have borrowed.
 
 ## Table of content
 - [Demo](#demo)
