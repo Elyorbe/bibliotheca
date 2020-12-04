@@ -5,7 +5,7 @@
 
 **Bibliotheca** is an **Integrated Library Management System** for a library to track and manage items owned, orders made, bills paid, and patrons who have borrowed.
 
-## Table of content
+## Table of contents
 - [Demo](#demo)
 - [Use Case](#use-case)
 - [Database Architecture](#database-architecture)
@@ -13,7 +13,7 @@
 - [Installation](#installation)
 
 ## Demo
-This demo is for version 1.0.0
+This is for version 1.0.0 and includes some(but not all) pages for demo
 
 ### Website
 
